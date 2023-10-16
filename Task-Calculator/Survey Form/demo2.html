@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        label {
+            display: block;
+            color:black;
+        }
+        .gender-input {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        body
+        {
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey Form</h1>
+    <form id="surveyForm">
+        <fieldset width="250px">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+        <br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+        <br> 
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+        <br>
+        <br>
+        <label for="country">Country:</label>
+        <select id="country" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="india">INDIA</option>
+            <!-- Add more country options here -->
+        </select>
+        <br>
+        <br>
+        
+        <label>Gender:</label>
+        <div class="gender-input">
+            <label for="male">Male</label> <input type="radio" id="male" name="gender" value="Male"> 
+        </div>
+        <div class="gender-input">
+            <label for="female">Female</label> <input type="radio" id="female" name="gender" value="Female"> 
+        </div>
+        <br>
+        <br>
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" required>
+        <br>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+        <br>
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" required>
+        
+        <input type="button" value="Submit" onclick="submitForm()">
+        <input type="button" value="Reset" onclick="resetForm()">
+    </fieldset>
+    </form>
+
+    <script>
+        function submitForm() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dob = document.getElementById('dob').value;
+            const country = document.getElementById('country').value;
+            const gender = document.querySelectorAll('input[name="gender"]:checked');
+            const profession = document.getElementById('profession').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            if (firstName && lastName && dob && country && gender.length > 0 && profession && email && mobile) {
+                let genderValues = [];
+                gender.forEach(g => genderValues.push(g.value));
+
+                const message = `First Name: ${firstName}\nLast Name: ${lastName}\nDate of Birth: ${dob}\nCountry: ${country}\nGender: ${genderValues.join(', ')}\nProfession: ${profession}\nEmail: ${email}\nMobile Number: ${mobile}`;
+
+                alert('Survey Data:\n' + message);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</body>
+</html>
